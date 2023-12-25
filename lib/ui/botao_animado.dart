@@ -1,17 +1,26 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
 
-import 'dart:developer';
-
+import 'package:basreng/bloc/auth_input_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'dashboard.dart';
 
 class BotaoAnimado extends StatelessWidget {
+  TextEditingController txtEmail;
+  TextEditingController txtPass;
   AnimationController controller;
   Animation<double> largura;
   Animation<double> altura;
   Animation<double> radius;
   Animation<double> opacidade;
 
-  BotaoAnimado({super.key, required this.controller})
+  BotaoAnimado(
+      {super.key,
+      required this.controller,
+      required this.txtEmail,
+      required this.txtPass})
       : largura = Tween<double>(
           begin: 0,
           end: 500,
@@ -51,9 +60,7 @@ class BotaoAnimado extends StatelessWidget {
 
   Widget _buildAnimation(BuildContext context, Widget? widget) {
     return InkWell(
-      onTap: () {
-        log("Kirim Clicked");
-      },
+      onTap: () => login(context),
       child: Container(
         width: largura.value,
         height: altura.value,
@@ -89,5 +96,17 @@ class BotaoAnimado extends StatelessWidget {
       animation: controller,
       builder: _buildAnimation,
     );
+  }
+
+  void login(BuildContext context) async {
+    try {
+      context.read<AuthInputBloc>().add(AuthInputEvent(null));
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: txtEmail.text, password: txtPass.text);
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Dashboard()));
+    } on FirebaseAuthException catch (e) {
+      context.read<AuthInputBloc>().add(AuthInputEvent(e.message));
+    }
   }
 }
