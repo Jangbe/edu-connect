@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1055175274311",
+    "project_id": "educonnect-c8977",
+    "storage_bucket": "educonnect-c8977.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055175274311:android:97b79d2eaa354e099fe662",
+        "android_client_info": {
+          "package_name": "com.example.basreng"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9GFw0WT52NT9kGJB39_EQbsv2Srj8p2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
