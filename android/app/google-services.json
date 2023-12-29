@@ -12,7 +12,12 @@
           "package_name": "com.example.basreng"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1055175274311-co3p9eagni5nj27v5eug2cbl0sjiphca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB9GFw0WT52NT9kGJB39_EQbsv2Srj8p2Q"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1055175274311-co3p9eagni5nj27v5eug2cbl0sjiphca.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1055175274311-c70ivrd9oushki0pan7dm29ocm2p3scl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.basreng"
+              }
+            }
+          ]
         }
       }
     }

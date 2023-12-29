@@ -1,8 +1,13 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:basreng/bloc/auth_input_bloc.dart';
+import 'package:basreng/ui/dashboard.dart';
 import 'package:basreng/ui/register.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'botao_animado.dart';
 import 'input_customizado.dart';
 
@@ -20,6 +25,40 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   Animation<double>? _animacaoBlur;
   Animation<double>? _animacaoFade;
   Animation<double>? _animacaoSize;
+
+  void signInWithGoogle() async {
+    if (kIsWeb) {
+      GoogleAuthProvider googleProvider = GoogleAuthProvider();
+
+      googleProvider.addScope('openid');
+
+      await FirebaseAuth.instance.signInWithPopup(googleProvider);
+
+      if (context.mounted) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => Dashboard()));
+      }
+    } else {
+      if (Platform.isAndroid) {
+        final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+        final GoogleSignInAuthentication? googleAuth =
+            await googleUser?.authentication;
+
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth?.accessToken,
+          idToken: googleAuth?.idToken,
+        );
+
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+        if (context.mounted) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => Dashboard()));
+        }
+      }
+    }
+  }
 
   @override
   void initState() {
@@ -190,7 +229,10 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                       padding: const EdgeInsets.only(top: 32.0),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Register()));
                         },
                         child: Text(
                           "Register",
@@ -198,6 +240,38 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                             color: Color.fromRGBO(255, 100, 127, 1),
                             fontWeight: FontWeight.bold,
                           ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: const [
+                        Expanded(child: Divider()),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          child: Text("Or continue with"),
+                        ),
+                        Expanded(child: Divider()),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    GestureDetector(
+                      onTap: signInWithGoogle,
+                      child: Container(
+                        padding: EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 2,
+                              color: Color.fromRGBO(255, 100, 127, 1),
+                            ),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Image.asset(
+                          "images/google.png",
+                          height: 40,
                         ),
                       ),
                     ),
