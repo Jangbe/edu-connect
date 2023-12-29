@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:basreng/bloc/auth_input_bloc.dart';
+import 'package:basreng/ui/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'botao_animado.dart';
@@ -182,6 +183,21 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                         style: TextStyle(
                           color: Color.fromRGBO(255, 100, 127, 1),
                           fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 32.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
+                        },
+                        child: Text(
+                          "Register",
+                          style: TextStyle(
+                            color: Color.fromRGBO(255, 100, 127, 1),
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
