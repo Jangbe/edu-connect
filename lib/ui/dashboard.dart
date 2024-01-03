@@ -20,10 +20,8 @@ class _DashboardState extends State<Dashboard> {
     mapController = controller;
   }
 
-  void _logOut() {
-    FirebaseAuth.instance.signOut();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => Login()));
+  void _logOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 
   @override
