@@ -13,12 +13,15 @@ EduConnect is an innovative platform dedicated to addressing the global challeng
 ## Hacker 2nd Submission
 
 - Register Page
+
 ![Register Page](./docs/register.jpeg)
 
 - Login Page
+
 ![Login Page](./docs/login.jpeg)
 
 - Map Page
+
 ![Map Page](./docs/maps.jpeg)
 
 ## Getting Started
