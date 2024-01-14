@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:basreng/database.dart';
-import 'package:basreng/ui/dashboard.dart';
+import 'package:basreng/ui/home_screen.dart';
 import 'package:basreng/ui/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             return Login();
           }
 
-          return Dashboard();
+          return HomeScreen();
         },
       ),
     );
