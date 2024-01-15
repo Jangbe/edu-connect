@@ -103,8 +103,6 @@ class BotaoAnimado extends StatelessWidget {
       context.read<AuthInputBloc>().add(AuthInputEvent(null));
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: txtEmail.text, password: txtPass.text);
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Dashboard()));
     } on FirebaseAuthException catch (e) {
       context.read<AuthInputBloc>().add(AuthInputEvent(e.message));
     }

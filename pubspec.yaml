@@ -71,7 +71,11 @@ flutter:
     - images/hamb.png
     - images/avatar.png
     - images/chv-right.png
+    - images/chv-left.png
     - images/card-placeholder.jpg
+    - images/school-avatar.png
+    - images/school-facitilies.jpg
+    - images/job-offer-avatar.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

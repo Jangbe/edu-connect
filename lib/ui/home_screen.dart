@@ -1,7 +1,9 @@
 import 'package:basreng/bloc/school_marker_bloc.dart';
+import 'package:basreng/ui/school_information_screen.dart';
 import 'package:basreng/widget/my_button.dart';
 import 'package:basreng/widget/my_card.dart';
 import 'package:basreng/widget/my_headbar.dart';
+import 'package:basreng/widget/my_row_card.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -61,39 +63,14 @@ class HomeScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Image(
-                    image: AssetImage('images/avatar.png'),
-                    width: 40,
-                  ),
-                  SizedBox(
-                    width: 12,
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Welcome, Syadda',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text(
-                          'Connection education',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.black.withOpacity(0.5),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  MyButton(title: 'Profile'),
-                ],
+              MyRowCard(
+                title: 'Welcome, Syadda',
+                description: 'Connection education',
+                image: Image(
+                  image: AssetImage('images/avatar.png'),
+                  width: 40,
+                ),
+                action: MyButton(title: 'Profile'),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
@@ -124,16 +101,35 @@ class HomeScreen extends StatelessWidget {
                   create: (context) =>
                       SchoolMarkerBloc()..add(FetchAllSchoolMarkerEvent()),
                   child: BlocBuilder<SchoolMarkerBloc, SchoolMarkerState>(
-                    builder: (context, state) => GoogleMap(
-                      gestureRecognizers: {
-                        Factory<OneSequenceGestureRecognizer>(
-                            () => EagerGestureRecognizer()),
-                      },
-                      initialCameraPosition: CameraPosition(
-                        target: LatLng(0.7893, 113.9213),
-                      ),
-                      markers: state.markers,
-                    ),
+                    builder: (context, state) {
+                      final markers = state.markers
+                          .map(
+                            (e) => Marker(
+                              markerId: MarkerId(e.name),
+                              position: LatLng(
+                                double.parse(e.lat),
+                                double.parse(e.long),
+                              ),
+                              onTap: () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      SchoolInformationScreen(locationMarker: e),
+                                ),
+                              ),
+                            ),
+                          )
+                          .toSet();
+                      return GoogleMap(
+                        gestureRecognizers: {
+                          Factory<OneSequenceGestureRecognizer>(
+                              () => EagerGestureRecognizer()),
+                        },
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(0.7893, 113.9213),
+                        ),
+                        markers: markers,
+                      );
+                    },
                   ),
                 ),
               ),
@@ -155,7 +151,12 @@ class HomeScreen extends StatelessWidget {
                     10,
                     (index) => Padding(
                       padding: const EdgeInsets.only(right: 8.0),
-                      child: MyCard(),
+                      child: MyCard(
+                        title: '12 Lessons',
+                        subTitle: 'Physics',
+                        image: AssetImage('images/card-placeholder.jpg'),
+                        isNew: true,
+                      ),
                     ),
                   ),
                 ),
