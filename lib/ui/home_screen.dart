@@ -1,5 +1,5 @@
 import 'package:basreng/bloc/school_marker_bloc.dart';
-import 'package:basreng/ui/school_information_screen.dart';
+import 'package:basreng/ui/school_map_screen.dart';
 import 'package:basreng/widget/my_button.dart';
 import 'package:basreng/widget/my_card.dart';
 import 'package:basreng/widget/my_headbar.dart';
@@ -112,8 +112,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                               onTap: () => Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      SchoolInformationScreen(locationMarker: e),
+                                  builder: (context) => SchoolMapScreen(),
                                 ),
                               ),
                             ),
