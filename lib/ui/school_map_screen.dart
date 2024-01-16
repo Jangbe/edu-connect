@@ -1,21 +1,19 @@
+import 'package:basreng/bloc/school_marker_bloc.dart';
+import 'package:basreng/model/location_marker.dart';
+import 'package:basreng/ui/school_information_screen.dart';
 import 'package:basreng/widget/my_back_appbar.dart';
 import 'package:basreng/widget/my_rounded_button.dart';
 import 'package:draggable_bottom_sheet/draggable_bottom_sheet.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class SchoolMapScreen extends StatelessWidget {
-  final List<IconData> icons = const [
-    Icons.message,
-    Icons.call,
-    Icons.mail,
-    Icons.notifications,
-    Icons.settings,
-  ];
+  final LocationMarker locationMarker;
 
-  const SchoolMapScreen({super.key});
+  const SchoolMapScreen({super.key, required this.locationMarker});
 
   @override
   Widget build(BuildContext context) {
@@ -45,14 +43,28 @@ class SchoolMapScreen extends StatelessWidget {
           ),
         },
         initialCameraPosition: CameraPosition(
-          target: LatLng(0.7893, 113.9213),
+          target: LatLng(
+            double.parse(locationMarker.lat),
+            double.parse(locationMarker.long),
+          ),
+          zoom: 8,
         ),
+        markers: {
+          Marker(
+            markerId: MarkerId(locationMarker.name),
+            position: LatLng(
+              double.parse(locationMarker.lat),
+              double.parse(locationMarker.long),
+            ),
+          ),
+        },
       ),
     );
   }
 
   Widget _expandedWidget() {
     return MySchoolMapSheet(
+      locationMarker: locationMarker,
       body: Padding(
         padding: const EdgeInsets.only(
           left: 25,
@@ -91,6 +103,7 @@ class SchoolMapScreen extends StatelessWidget {
 
   Widget _previewWidget() {
     return MySchoolMapSheet(
+      locationMarker: locationMarker,
       body: SizedBox(
         width: 0,
         height: 0,
@@ -100,11 +113,13 @@ class SchoolMapScreen extends StatelessWidget {
 }
 
 class MySchoolMapSheet extends StatelessWidget {
+  final LocationMarker locationMarker;
   final Widget body;
 
   const MySchoolMapSheet({
     super.key,
     required this.body,
+    required this.locationMarker,
   });
 
   @override
@@ -137,7 +152,7 @@ class MySchoolMapSheet extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 25),
             child: Text(
-              'SMKN 2 Bandung',
+              locationMarker.name,
               style: TextStyle(fontSize: 20),
             ),
           ),
@@ -146,11 +161,26 @@ class MySchoolMapSheet extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Text(
-              'Jl. Ciliwung 2 RT 03 RW 06, Sukaluyu, Cibeunying Kaler, Bandung',
-              style: TextStyle(
-                fontSize: 11,
-                color: Colors.black.withOpacity(0.7),
+            child: BlocProvider(
+              create: (context) => SchoolMarkerBloc()
+                ..add(
+                  GetPlacemarkSchoolEvent(
+                    lat: double.parse(locationMarker.lat),
+                    long: double.parse(
+                      locationMarker.long,
+                    ),
+                  ),
+                ),
+              child: BlocBuilder<SchoolMarkerBloc, SchoolMarkerState>(
+                builder: (context, state) {
+                  return Text(
+                    '${state.placemark?.subLocality}, ${state.placemark?.locality}, ${state.placemark?.subAdministrativeArea}, ${state.placemark?.administrativeArea}, ${state.placemark?.postalCode}, ${state.placemark?.country}',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.black.withOpacity(0.7),
+                    ),
+                  );
+                },
               ),
             ),
           ),
@@ -168,7 +198,14 @@ class MySchoolMapSheet extends StatelessWidget {
                     vertical: 6,
                   ),
                   title: 'School Info',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => SchoolInformationScreen(
+                            locationMarker: locationMarker),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(
                   width: 7,

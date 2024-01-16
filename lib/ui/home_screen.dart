@@ -112,7 +112,9 @@ class HomeScreen extends StatelessWidget {
                               ),
                               onTap: () => Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => SchoolMapScreen(),
+                                  builder: (context) => SchoolMapScreen(
+                                    locationMarker: e,
+                                  ),
                                 ),
                               ),
                             ),
