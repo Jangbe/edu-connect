@@ -1,4 +1,5 @@
 import 'package:basreng/bloc/school_marker_bloc.dart';
+import 'package:basreng/ui/private_tutors_screen.dart';
 import 'package:basreng/ui/school_map_screen.dart';
 import 'package:basreng/widget/my_button.dart';
 import 'package:basreng/widget/my_card.dart';
@@ -40,20 +41,31 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.map),
-          label: 'School Map',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.book),
-          label: 'Course',
-        ),
-      ]),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index) {
+          if (index == 2) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => PrivateTutorsScreen(),
+              ),
+            );
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'School Map',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'Tutors',
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(
