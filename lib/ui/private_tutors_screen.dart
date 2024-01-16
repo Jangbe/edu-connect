@@ -1,3 +1,4 @@
+import 'package:basreng/ui/tutors_profile_screen.dart';
 import 'package:basreng/widget/my_back_appbar.dart';
 import 'package:basreng/widget/my_card.dart';
 import 'package:basreng/widget/my_chip_field.dart';
@@ -39,10 +40,19 @@ class PrivateTutorsScreen extends StatelessWidget {
                     10,
                     (index) => Padding(
                       padding: const EdgeInsets.only(right: 8.0),
-                      child: MyCard(
-                        title: '12 Lessons',
-                        subTitle: 'Physics',
-                        image: AssetImage('images/card-placeholder.jpg'),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => TutorsProfileScreen(),
+                            ),
+                          );
+                        },
+                        child: MyCard(
+                          title: '12 Lessons',
+                          subTitle: 'Physics',
+                          image: AssetImage('images/card-placeholder.jpg'),
+                        ),
                       ),
                     ),
                   ),

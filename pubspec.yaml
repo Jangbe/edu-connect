@@ -81,6 +81,10 @@ flutter:
     - images/lap.png
     - images/banner.png
     - images/faq.png
+    - images/prof-tutor.jpg
+    - images/xxx.png
+    - images/5star.png
+    - images/cat.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see
