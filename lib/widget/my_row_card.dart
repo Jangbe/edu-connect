@@ -18,7 +18,15 @@ class MyRowCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        image,
+        Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(50),
+            ),
+          ),
+          child: image,
+        ),
         SizedBox(
           width: 12,
         ),

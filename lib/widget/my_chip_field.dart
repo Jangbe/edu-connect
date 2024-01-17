@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class MyChipField extends StatelessWidget {
   final String label;
+  final List<Widget> children;
 
   const MyChipField({
     super.key,
     required this.label,
+    this.children = const [],
   });
 
   @override
@@ -27,16 +29,17 @@ class MyChipField extends StatelessWidget {
           height: 36,
           child: ListView(
             scrollDirection: Axis.horizontal,
-            children: List.generate(
-              10,
-              (index) => Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Chip(
-                  backgroundColor: Colors.black.withOpacity(0.05),
-                  label: Text('Elementary School'),
-                ),
-              ),
-            ),
+            children: children
+                .map(
+                  (e) => Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Chip(
+                      backgroundColor: Colors.black.withOpacity(0.05),
+                      label: e,
+                    ),
+                  ),
+                )
+                .toList(),
           ),
         ),
       ],

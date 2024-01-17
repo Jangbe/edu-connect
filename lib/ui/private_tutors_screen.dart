@@ -18,7 +18,14 @@ class PrivateTutorsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MyChipField(label: ''),
+              MyChipField(
+                label: '',
+                children: const [
+                  Text('Browse Tutors'),
+                  Text('Schedule Session'),
+                  Text('Manage Payments'),
+                ],
+              ),
               SizedBox(
                 height: 28,
               ),
@@ -36,9 +43,8 @@ class PrivateTutorsScreen extends StatelessWidget {
                 height: 210,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  children: List.generate(
-                    10,
-                    (index) => Padding(
+                  children: [
+                    Padding(
                       padding: const EdgeInsets.only(right: 8.0),
                       child: GestureDetector(
                         onTap: () {
@@ -49,13 +55,47 @@ class PrivateTutorsScreen extends StatelessWidget {
                           );
                         },
                         child: MyCard(
-                          title: '12 Lessons',
-                          subTitle: 'Physics',
-                          image: AssetImage('images/card-placeholder.jpg'),
+                          title: 'Jasman Pardede',
+                          subTitle: 'Mathematics',
+                          image: AssetImage('images/jasman.png'),
                         ),
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => TutorsProfileScreen(),
+                            ),
+                          );
+                        },
+                        child: MyCard(
+                          title: 'Milda Gustiana',
+                          subTitle: 'Science',
+                          image: AssetImage('images/milda.png'),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => TutorsProfileScreen(),
+                            ),
+                          );
+                        },
+                        child: MyCard(
+                          title: 'Jasman Pardede',
+                          subTitle: 'Mathematics',
+                          image: AssetImage('images/jasman.png'),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(
@@ -76,7 +116,7 @@ class PrivateTutorsScreen extends StatelessWidget {
                 description: 'Math',
                 image: Image(
                   height: 32,
-                  image: AssetImage('images/job-offer-avatar.png'),
+                  image: AssetImage('images/sch.png'),
                 ),
                 action: Column(
                   children: const [
@@ -87,16 +127,16 @@ class PrivateTutorsScreen extends StatelessWidget {
               ),
               Divider(),
               MyRowCard(
-                title: 'Session 1',
-                description: 'Math',
+                title: 'Session 2',
+                description: 'Physics',
                 image: Image(
                   height: 32,
-                  image: AssetImage('images/job-offer-avatar.png'),
+                  image: AssetImage('images/sch.png'),
                 ),
                 action: Column(
                   children: const [
                     Text('Teacher:'),
-                    Text('Tutor1'),
+                    Text('Tutor2'),
                   ],
                 ),
               ),
@@ -125,11 +165,21 @@ class PrivateTutorsScreen extends StatelessWidget {
               SizedBox(
                 height: 12,
               ),
-              MyFaqCard(),
+              MyFaqCard(
+                title: 'How can I cancel a scheduled session?',
+                description:
+                    'You can cancel a session by contacting the tutor directly.',
+                imageProvider: AssetImage('images/faq.png'),
+              ),
               SizedBox(
                 height: 8,
               ),
-              MyFaqCard(),
+              MyFaqCard(
+                title: 'How do I make payments?',
+                description:
+                    'Payments can be made securely through the EduConnect platform.',
+                imageProvider: AssetImage('images/faq2.png'),
+              ),
               SizedBox(
                 height: 12,
               ),
@@ -142,8 +192,15 @@ class PrivateTutorsScreen extends StatelessWidget {
 }
 
 class MyFaqCard extends StatelessWidget {
+  final String title;
+  final String description;
+  final ImageProvider imageProvider;
+
   const MyFaqCard({
     super.key,
+    required this.title,
+    required this.description,
+    required this.imageProvider,
   });
 
   @override
@@ -160,27 +217,28 @@ class MyFaqCard extends StatelessWidget {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Image(
             width: 80,
             height: 80,
-            image: AssetImage('images/faq.png'),
+            image: imageProvider,
           ),
           SizedBox(
             width: 5,
           ),
           Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'How can I cancel a scheduled session?',
+                  title,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  'You can cancel a session by contacting the tutor directly.',
+                  description,
                   style: TextStyle(
                     fontSize: 12,
                   ),

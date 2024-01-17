@@ -21,10 +21,10 @@ class TutorsProfileScreen extends StatelessWidget {
               height: 32,
             ),
             MyRowCard(
-              title: 'Marisa',
+              title: 'Jasman Pardede',
               description: 'Mathematics Specialist',
               image: Image(
-                image: AssetImage('images/avatar.png'),
+                image: AssetImage('images/jasman.png'),
                 width: 40,
               ),
               action: SizedBox(
@@ -42,7 +42,7 @@ class TutorsProfileScreen extends StatelessWidget {
                   height: 80,
                   width: 80,
                   fit: BoxFit.cover,
-                  image: AssetImage('images/prof-tutor.jpg'),
+                  image: AssetImage('images/jasman.png'),
                 ),
                 SizedBox(
                   width: 12,
@@ -74,48 +74,36 @@ class TutorsProfileScreen extends StatelessWidget {
               height: 28,
             ),
             SizedBox(
-              height: 116,
+              height: 130,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: List.generate(
-                  10,
-                  (index) => Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: Container(
-                      width: 220,
-                      padding: EdgeInsets.all(12),
-                      color: Colors.black.withOpacity(0.05),
-                      child: Column(
-                        children: const [
-                          Row(
-                            children: [
-                              Image(
-                                width: 24,
-                                height: 24,
-                                image: AssetImage('images/xxx.png'),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Expanded(
-                                child: Text('Ammy'),
-                              ),
-                              Image(
-                                width: 59,
-                                height: 10,
-                                image: AssetImage('images/5star.png'),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text('Tutor1 is an excellent teacher.'),
-                        ],
-                      ),
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: MyCommentCard(
+                      name: 'Ammy',
+                      comment: 'Tutor1 is an excellent teacher.',
+                      imageProvider: AssetImage('images/xxx.png'),
                     ),
                   ),
-                ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: MyCommentCard(
+                      name: 'Johnson',
+                      comment:
+                          'Tutor1 helped me understand complex concepts easily.',
+                      imageProvider: AssetImage('images/xxx2.png'),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: MyCommentCard(
+                      name: 'Ammy',
+                      comment: 'Tutor1 is an excellent teacher.',
+                      imageProvider: AssetImage('images/xxx.png'),
+                    ),
+                  ),
+                ],
               ),
             ),
             SizedBox(
@@ -125,36 +113,29 @@ class TutorsProfileScreen extends StatelessWidget {
               height: 56,
               child: ListView(
                 scrollDirection: Axis.horizontal,
-                children: List.generate(
-                  10,
-                  (index) => Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black.withOpacity(0.05),
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(6),
-                        ),
-                      ),
-                      child: Row(
-                        children: const [
-                          Image(
-                            width: 32,
-                            height: 32,
-                            image: AssetImage('images/cat.png'),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Text('Mathematics'),
-                        ],
-                      ),
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: MySubjectCard(
+                      title: 'Mathematics',
+                      imageProvider: AssetImage('images/cat.png'),
                     ),
                   ),
-                ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: MySubjectCard(
+                      title: 'Physics',
+                      imageProvider: AssetImage('images/cat2.png'),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 8.0),
+                    child: MySubjectCard(
+                      title: 'Mathematics',
+                      imageProvider: AssetImage('images/cat.png'),
+                    ),
+                  ),
+                ],
               ),
             ),
             SizedBox(
@@ -184,6 +165,95 @@ class TutorsProfileScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class MySubjectCard extends StatelessWidget {
+  final String title;
+  final ImageProvider imageProvider;
+
+  const MySubjectCard({
+    super.key,
+    required this.title,
+    required this.imageProvider,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black.withOpacity(0.05),
+        ),
+        borderRadius: BorderRadius.all(
+          Radius.circular(6),
+        ),
+      ),
+      child: Row(
+        children: [
+          Image(
+            width: 32,
+            height: 32,
+            image: imageProvider,
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          Text(title),
+        ],
+      ),
+    );
+  }
+}
+
+class MyCommentCard extends StatelessWidget {
+  final String name;
+  final String comment;
+  final ImageProvider imageProvider;
+
+  const MyCommentCard({
+    super.key,
+    required this.name,
+    required this.comment,
+    required this.imageProvider,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 220,
+      padding: EdgeInsets.all(12),
+      color: Colors.black.withOpacity(0.05),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Image(
+                width: 24,
+                height: 24,
+                image: imageProvider,
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              Expanded(
+                child: Text(name),
+              ),
+              Image(
+                width: 59,
+                height: 10,
+                image: AssetImage('images/5star.png'),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          Text(comment),
+        ],
       ),
     );
   }

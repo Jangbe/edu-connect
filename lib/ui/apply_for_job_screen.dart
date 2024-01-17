@@ -87,12 +87,23 @@ class ApplyForJobScreen extends StatelessWidget {
               ),
               MyChipField(
                 label: 'Grade Level',
+                children: const [
+                  Text('Elementary School'),
+                  Text('Middle School'),
+                  Text('High School'),
+                ],
               ),
               SizedBox(
                 height: 12,
               ),
               MyChipField(
                 label: 'Subject',
+                children: const [
+                  Text('Mathematics'),
+                  Text('Science'),
+                  Text('English'),
+                  Text('Social Studies'),
+                ],
               ),
               SizedBox(
                 height: 28,
