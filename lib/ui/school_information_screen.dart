@@ -65,17 +65,32 @@ class SchoolInformationScreen extends StatelessWidget {
                 height: 210,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  children: List.generate(
-                    10,
-                    (index) => Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(right: 8.0),
                       child: MyCard(
                         title: 'Computer Lab',
                         subTitle: 'School Facilities',
                         image: AssetImage('images/school-facitilies.jpg'),
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: MyCard(
+                        title: 'Lab',
+                        subTitle: 'School Specialties',
+                        image: AssetImage('images/lab.png'),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: MyCard(
+                        title: 'Computer Lab',
+                        subTitle: 'School Facilities',
+                        image: AssetImage('images/school-facitilies.jpg'),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
