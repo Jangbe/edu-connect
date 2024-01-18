@@ -160,10 +160,9 @@ class HomeScreen extends StatelessWidget {
                 height: 210,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
-                  children: List.generate(
-                    10,
-                    (index) => Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(right: 8.0),
                       child: MyCard(
                         title: '12 Lessons',
                         subTitle: 'Physics',
@@ -171,7 +170,23 @@ class HomeScreen extends StatelessWidget {
                         isNew: true,
                       ),
                     ),
-                  ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: MyCard(
+                        title: '8 Lessons',
+                        subTitle: 'Guitar Lessons',
+                        image: AssetImage('images/card2.png'),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 8.0),
+                      child: MyCard(
+                        title: '12 Lessons',
+                        subTitle: 'Physics',
+                        image: AssetImage('images/card-placeholder.jpg'),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(

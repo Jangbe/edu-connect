@@ -24,6 +24,28 @@ EduConnect is an innovative platform dedicated to addressing the global challeng
 
 ![Map Page](./docs/maps.jpeg)
 
+## Final Submission
+
+- Home Screen
+
+![Home Screen](./docs/home_screen.jpeg)
+
+- Private Tutors Screen
+
+![Private Tutors Screen](./docs/private_tutors.jpeg)
+
+- School Information Screen
+
+![School Information Screen](./docs/school_information.jpeg)
+
+- School Map Screen
+
+![School Map Screen](./docs/school_map.jpeg)
+
+- Tutors Profile Screen
+
+![Tutors Profile Screen](./docs/tutors_profile.jpeg)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
